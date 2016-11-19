@@ -45,15 +45,15 @@ class CollectionExample
 		
 	}
 	
-	public static void populate(AbstractList a)
+	public static void populate(List a)
 	{
-		for(int i=0; i < 5000; i++)
+		for(int i=0; i < 50000; i++)
 		{
 			a.add("Element #" + Integer.toString(i+1));
 		}
 	}	
 	
-	public static void print(AbstractList a)
+	public static void print(List a)
 	{
 		for(int i=0; i < a.size(); i++)
 		{
