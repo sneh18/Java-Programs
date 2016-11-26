@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -20,11 +21,11 @@ class BorderLayoutFrame extends JFrame implements ActionListener
 	private JPanel eastPanel;
 	private JPanel centerPanel;
 	
-	private int center;
-	private int north;
-	private int south;
-	private int west;
-	private int east;
+	private boolean center;
+	private boolean north;
+	private boolean south;
+	private boolean west;
+	private boolean east;
 	
 	BorderLayoutFrame()
 	{
@@ -49,15 +50,21 @@ class BorderLayoutFrame extends JFrame implements ActionListener
 		// For West
 		p = new JPanel(null);
 		
-		button = new JButton("Blue");
+		button = new JButton("Red");
 		button.setBounds(10,30,80,20);
-		button.setText("Blue");
+		button.setText("Red");
 		button.addActionListener(this);
 		p.add(button);
 		
-		button = new JButton("Orange");
+		button = new JButton("Green");
 		button.setBounds(10,60,80,20);
-		button.setText("Orange");
+		button.setText("Green");
+		button.addActionListener(this);
+		p.add(button);
+		
+		button = new JButton("Yellow");
+		button.setBounds(10,120,80,20);
+		button.setText("Yellow");
 		button.addActionListener(this);
 		p.add(button);
 		
@@ -67,11 +74,7 @@ class BorderLayoutFrame extends JFrame implements ActionListener
 		button.addActionListener(this);
 		p.add(button);
 		
-		button = new JButton("Green");
-		button.setBounds(10,120,80,20);
-		button.setText("Green");
-		button.addActionListener(this);
-		p.add(button);
+		
 		
 		chk = new JCheckBox("Color Me");
 		chk.setBounds(10, 10, 20, 20);
@@ -165,17 +168,17 @@ class BorderLayoutFrame extends JFrame implements ActionListener
 		centerPanel = p;
 		//---------------------------------------
 		
-		northPanel.setBackground(Color.ORANGE);
+		northPanel.setBackground(Color.WHITE);
 		westPanel.setBackground(Color.WHITE);
 		centerPanel.setBackground(Color.WHITE);
 		eastPanel.setBackground(Color.WHITE);
-		southPanel.setBackground(Color.GREEN);
+		southPanel.setBackground(Color.WHITE);
 		
-		center = 0;
-		north  = 0;
-		south  = 0;
-		west   = 0;
-		east   = 0;
+		center = false;
+		north  = false;
+		south  = false;
+		west   = false;
+		east   = false;
 		
 		setVisible(true);
 	}
@@ -188,25 +191,25 @@ class BorderLayoutFrame extends JFrame implements ActionListener
 			JButton c = (JButton)event.getSource();
 			Color selectedColor = Color.WHITE;
 		
-			if(c.getText().equals("Blue"))
-				selectedColor = Color.BLUE;
-			else if(c.getText().equals("Orange"))
-				selectedColor = Color.ORANGE;
+			if(c.getText().equals("Red"))
+				selectedColor = Color.RED;
+			else if(c.getText().equals("Yellow"))
+				selectedColor = Color.YELLOW;
 			else if(c.getText().equals("White"))
 				selectedColor = Color.WHITE;
 			else if(c.getText().equals("Green"))
 				selectedColor = Color.GREEN;
 				
 				
-			if(center == 1)
+			if(center)
 				centerPanel.setBackground(selectedColor);
-			if(east == 1)
+			if(east)
 				eastPanel.setBackground(selectedColor);
-			if(west == 1)
+			if(west)
 				westPanel.setBackground(selectedColor);
-			if(north == 1)
+			if(north)
 				northPanel.setBackground(selectedColor);
-			if(south == 1)
+			if(south)
 				southPanel.setBackground(selectedColor);
 		
 		}
@@ -216,37 +219,37 @@ class BorderLayoutFrame extends JFrame implements ActionListener
 			if(chk.getName().equals("Center"))
 			{
 				if(chk.isSelected())
-					center = 1;
+					center = true;
 				else
-					center = 0;
+					center = false;
 			}
 			else if(chk.getName().equals("North"))
 			{
 				if(chk.isSelected())
-					north = 1;
+					north = true;
 				else
-					north = 0;
+					north = false;
 			}
 			else if(chk.getName().equals("South"))
 			{
 				if(chk.isSelected())
-					south = 1;
+					south = true;
 				else
-					south = 0;
+					south = false;
 			}
 			else if(chk.getName().equals("West"))
 			{
 				if(chk.isSelected())
-					west = 1;
+					west = true;
 				else
-					west = 0;
+					west = false;
 			}
 			else if(chk.getName().equals("East"))
 			{
 				if(chk.isSelected())
-					east = 1;
+					east = true;
 				else
-					east = 0;
+					east = false;
 			}
 		}
 		
