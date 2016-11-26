@@ -2,29 +2,60 @@
 package JAVA.gui;
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
 
-class GUIExample
+class GUIExample extends JFrame
 {
+	public void paint(Graphics g) 
+	{
+		// Temporary code
+		Graphics2D g2D = (Graphics2D)g; // Get a Java 2D device context
+		g2D.setPaint(Color.RED); // Draw in red
+		g2D.draw3DRect(50, 50, 150, 100, true); // Draw a raised 3D rectangle
+		g2D.drawString("A nice 3D rectangle", 60, 100); // Draw some text
+	}
+	
+	GUIExample()
+	{
+		super("My Frame");
+	}
+
 	public static void main(String[] args)
 	{
+		System.out.println(Thread.currentThread().getName());
 		
-		JFrame jf = new JFrame();
+		final GUIExample example = new GUIExample();	
+	
+		SwingUtilities.invokeLater(
+			new Runnable() { // Anonymous Runnable class object
+				public void run() { // Run method executed in thread
+				example.createUI(); // Call static GUI creator
+			}
+		} );
+		
+	}
+	
+	public void createUI()
+	{
+		System.out.println(Thread.currentThread().getName());
+		
 		int windowWidth = 400; // Window width in pixels
 		int windowHeight = 400; // Window height in pixels
-		jf.setBounds(50, 100, // Set position
+		this.setBounds(50, 100, // Set position
 		windowWidth, windowHeight); // and size
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jf.setTitle("My JFrame");
-		jf.getContentPane().setBackground(Color.ORANGE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("My JFrame");
+		this.getContentPane().setBackground(Color.ORANGE);
 		
 		Dimension d = new Dimension(100,100);
 		
-		jf.setMinimumSize(d);
+		this.setMinimumSize(d);
 		
-		jf.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		addComponents(jf.getContentPane());
+		this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
-		jf.setVisible(true);
+		//addComponents(this.getContentPane());
+		
+		this.setVisible(true);
 	}
 	
 	public static void addComponents(Container c)
@@ -32,10 +63,10 @@ class GUIExample
 		c.setLayout(new FlowLayout()); 
 		for(int i = 1; i <= 6; i++)
 		{
-			JButton button = new JButton("Press " + i);
-			button.setName("Button : "+i);
-			c.add(button); 
-			button.addActionListener(new ButtonClickListener());
+			JTextField textBox = new JTextField("Press " + i);
+			textBox.setName("textBox : "+i);
+			c.add(textBox); 
+			textBox.addFocusListener(new TextBoxFocusListener());
 		}
 	}
 }
